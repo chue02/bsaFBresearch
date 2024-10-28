@@ -3,3 +3,4 @@
 .Rhistory
 .ipynb_checkpoints
 .gitignore~
+data/
