@@ -1,4 +1,4 @@
-# BSA Research Project
+# BSA Football Research Project 2024
 
 How can a defense maximize their EPA in "clutch time"?
 
@@ -6,12 +6,21 @@ How can a defense maximize their EPA in "clutch time"?
 
 ## Data Sources
 
-Provided by nflverse.
-[Play-py-Play](https://github.com/nflverse/nflverse-data/releases/tag/pbp) data was acquired here while [NGS play-by-play](https://github.com/nflverse/nflverse-data/releases/tag/pbp_participation) data was acquired here.
+Acquired from repos provided by nflverse. Here are the repo links for the types of dataframes:
+[play_by_play](https://github.com/nflverse/nflverse-data/releases/tag/pbp) 
+[pbp_participation](https://github.com/nflverse/nflverse-data/releases/tag/pbp_participation) 
 
 Any data acquired from the GitHub links will be in the `data/raw` folder while anything we cleaned up will be in other folders of the `data` directory.
 
 ## Packages Used in Conda
+- pandas
+- numpy
+- matplotlib
+- seaborn
+- scikit
+- os
+
+Full explicit list:
 ```
 # Name                    Version                   Build  Channel
 blas                      1.0                    openblas  
@@ -82,7 +91,7 @@ zstd                      1.5.6                hfb09047_0
 
 # TODO:
 
-- [ ] Clean dataframes
+- [X] Clean dataframes
 - [ ] Figure out how to JOIN pbp and pbp_participation dataframes
   - Probably based on game id?
 - [ ] Create zero-sum matrix using Tableau and EPA
