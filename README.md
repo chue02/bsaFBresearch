@@ -23,24 +23,59 @@ Any data acquired from the GitHub links will be in the `data/raw` folder (not pr
 - scikit
 - os
 
+## Features Used
+
+- Quarter (4th)
+- Time Left (2:00)
+- Personnel
+- Coverage
+- Passing Splashes (Deep/Shallow, Left/Right/Middle)
+- QB Aggression
+- EPA
+- Timeouts Left
+
 
 ## TODO:
+### New Goal:
+Now create model to predict probability of **route concepts** that will be called
+  - In essence, we are now creating a classification model
+
+#### Model Possibilties:
+- Neural Networks
+- Bayesian models
+- Stochastic models
+- Markov decision chain
+- ARIMA
+- Clustering
+- T-distribution
 
 ### Eric
  - [ ] Continue to clean merged data
   - [ ] Merge highly similar personnel combos
+- [ ] Add filters by team to see specific route concept tendencies
+- [ ] See correlation between number of pass rushers vs time to throw
+  - [ ] And see if I can also filter this information by QB clustering
+- [ ] Markov decision chain
 
 ### Vardaan
 - [ ] More exploratory data analysis
   - [ ] Check out different variables' correlation with EPA
   - [ ] Also examine multicollinearity
+- [ ]
 
 ### Naren
 - [ ] Look more into Bayesian approach
   - [ ] how to set up a model/classification for this situation
+- [ ] Clustering models
 
 ### Aadrij
-- [ ] QB clustering (mobile vs pocket, good vs bad)
+- [ ] QB quality (mobile vs pocket, good vs bad)
+- [ ] ARIMA
 
-### Nikhil and Rithvik
+### Nikhil
 - [ ] Research Markov modeling and how it would apply to this project
+- [ ] Markov
+
+### Rithvik
+- [ ] Markov
+- [ ] ANOVA
