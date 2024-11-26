@@ -53,9 +53,9 @@ df['location_encoded'] = df['location_encoded'].astype(int)
 
 # Model implementation
 
-X = df[['yardline_100', 'quarter_seconds_remaining', 'down', 'ydstogo', 'no_huddle', 'length_encoded', 'location_encoded', 'out_of_bounds',
-        'posteam_timeouts_remaining', 'defenders_in_box', 'number_of_pass_rushers', 'time_to_throw', 'pressure_encoded', 
-        'route_encoded', 'coverage_encoded', 'score_differential_post']]
+X = df[['score_differential_post', 'yardline_100', 'quarter_seconds_remaining', 'down', 'ydstogo', 'posteam_timeouts_remaining', 'no_huddle',
+        'length_encoded', 'location_encoded', 'out_of_bounds', 'defenders_in_box', 'number_of_pass_rushers', 'time_to_throw',
+        'pressure_encoded', 'route_encoded', 'coverage_encoded']]
 
 y = df[['epa']]
 
