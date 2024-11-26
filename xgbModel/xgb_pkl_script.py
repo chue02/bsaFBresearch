@@ -15,7 +15,7 @@ years = [18, 19, 20, 21, 22, 23]
 # Load data per year
 # To deploy the app, streamlit requires you to have the data in the same directory as the app. 
 for x in years:
-    data[x] = pd.read_csv('xgbData/pbp_refined_20' + str(x) + '.csv')
+    data[x] = pd.read_csv('../xgbData/pbp_refined_20' + str(x) + '.csv')
 
 # Create one large dataframe containing all the data
 df = pd.concat(data, ignore_index=True)
