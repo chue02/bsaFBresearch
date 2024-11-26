@@ -10,12 +10,12 @@ locations = ['left', 'right', 'middle']
 routes = ['SCREEN', 'OUT', 'IN', 'SLANT', 'GO', 'HITCH', 'CROSS', 'ANGLE', 'FLAT', 'POST', 'CORNER', 'WHEEL']
 
 # User inputs
-score_diff = st.number_input("Points down", min_value = 1, max_value = 8, value = 4)
+score_diff = st.slider("Points down", min_value = 1, max_value = 8, value = 4)
 yardline_100 = st.number_input("Yards from endzone", min_value = 1, max_value = 99, value = 25)
 quarter_seconds_remaining = st.number_input("Time Remaining in 4th Qtr (seconds)", min_value=0, max_value = 120, value=120)
 down = st.slider("Down", 1, 4, value = 1, step = 1)
-ydstogo = st.slider("Distance to First Down (yards)", 1, 30, value = 10, step = 1)
-timeouts = st.slider("Timeouts left:", 1, 3, value = 3, step = 1)
+ydstogo = st.number_input("Distance to First Down (yards)", 1, 30, value = 10, step = 1)
+timeouts = st.slider("Timeouts left:", 0, 3, value = 3, step = 1)
 defenders_in_box = st.slider("Defenders in the box", 0, 9, value = 5, step = 1)
 number_of_pass_rushers = st.slider("Number of pass rushers", 0, 8, value = 4, step = 1)
 no_huddle = st.checkbox("No huddle?", value = False)
@@ -47,7 +47,7 @@ features = {
 }
 
 # Predict and display results
-if st.button("Predict EPAs Per Coverage"):
+if st.button("Predict EPAs per Coverage"):
     play = predict_play(features)
     output = play[['Coverage', 'predicted_EPA']].sort_values(by=['predicted_EPA'])
     st.write(f"### Predicted EPAs Based on Scenario: ")
