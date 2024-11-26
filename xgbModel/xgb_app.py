@@ -10,15 +10,17 @@ locations = ['left', 'right', 'middle']
 routes = ['SCREEN', 'OUT', 'IN', 'SLANT', 'GO', 'HITCH', 'CROSS', 'ANGLE', 'FLAT', 'POST', 'CORNER', 'WHEEL']
 
 # User inputs
+score_diff = st.number_input("Points down", min_value = 1, max_value = 8, value = 4)
 yardline_100 = st.number_input("Yards from endzone", min_value = 1, max_value = 99, value = 25)
 quarter_seconds_remaining = st.number_input("Time Remaining in 4th Qtr (seconds)", min_value=0, max_value = 120, value=120)
-#down = st.selectbox("Down", [1, 2, 3, 4])
-ydstogo = st.slider("Distance to First Down (yards)", 1, 30, 1)
-defenders_in_box = st.slider("Defenders in the box", 1, 11, 1)
-number_of_pass_rushers = st.slider("Number of pass rushers", 1, 11, 1)
-no_huddle = st.checkbox("No huddle?")
-out_of_bounds = st.checkbox("Did play go out of bounds?")
-pressure = st.checkbox("Was the QB pressured?")
+down = st.slider("Down", 1, 4, value = 1, step = 1)
+ydstogo = st.slider("Distance to First Down (yards)", 1, 30, value = 10, step = 1)
+timeouts = st.slider("Timeouts left:", 1, 3, value = 3, step = 1)
+defenders_in_box = st.slider("Defenders in the box", 0, 9, value = 5, step = 1)
+number_of_pass_rushers = st.slider("Number of pass rushers", 0, 8, value = 4, step = 1)
+no_huddle = st.checkbox("No huddle?", value = False)
+out_of_bounds = st.checkbox("Did play go out of bounds?", value = False)
+pressure = st.checkbox("Was the QB pressured?", value = False)
 time_to_throw = st.slider("Time to throw (seconds)", min_value = 0.5, max_value = 13.5, value = 2.67, step = 0.01)
 pass_length = st.selectbox('Choose pass length:', lengths)
 pass_location = st.selectbox('Choose pass location:', locations)
@@ -27,9 +29,12 @@ route = st.selectbox('Choose route completed:', routes)
 
 # Create feature dictionary
 features = {
+    'score_differential_post': score_diff, 
     'yardline_100' : yardline_100,
     'quarter_seconds_remaining': quarter_seconds_remaining,
+    'down': down,
     'ydstogo': ydstogo,
+    'posteam_timeouts_remaining': timeouts,
     'no_huddle': no_huddle,
     'length_encoded': pass_length,
     'location_encoded': pass_location,
