@@ -48,7 +48,4 @@ if st.button("Predict EPAs Per Coverage"):
     st.write(f"### Predicted EPAs Based on Scenario: ")
     st.dataframe(output)
 
-# Clear cache if needed
-st.cache_data.clear()
-
     
