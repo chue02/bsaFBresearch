@@ -3,7 +3,6 @@ import pandas as pd
 from sklearn.preprocessing import LabelEncoder
 from xgb_pkl_script import le_route, le_coverage, le_pressure, le_length, le_location, y
 import xgboost as xgb
-import streamlit as st
 
 # Constants
 coverages = ['COVER_3', 'COVER_4', 'COVER_1', 'COVER_0', 'COVER_6', 'COVER_2', '2_MAN', 'PREVENT']
