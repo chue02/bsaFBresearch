@@ -47,4 +47,8 @@ if st.button("Predict EPAs Per Coverage"):
     output = play[['Coverage', 'predicted_EPA']].sort_values(by=['predicted_EPA'])
     st.write(f"### Predicted EPAs Based on Scenario: ")
     st.dataframe(output)
+
+# Clear cache if needed
+st.cache_data.clear()
+
     
