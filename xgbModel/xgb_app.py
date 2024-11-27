@@ -5,31 +5,48 @@ from xgb_predictor import predict_play
 st.title("NFL Coverage 4th Qtr EPA Predictor")
 
 # Constants
-lengths = ['short', 'deep'] # Why no middle? Should we use air yards instead?
-locations = ['left', 'right', 'middle']
-routes = ['SCREEN', 'OUT', 'IN', 'SLANT', 'GO', 'HITCH', 'CROSS', 'ANGLE', 'FLAT', 'POST', 'CORNER', 'WHEEL']
+LENGTHS = ['short', 'deep'] # Why no middle? Should we use air yards instead?
+LOCATIONS = ['left', 'right', 'middle']
+ROUTES = ['SCREEN', 'OUT', 'IN', 'SLANT', 'GO', 'HITCH', 'CROSS', 'ANGLE', 'FLAT', 'POST', 'CORNER', 'WHEEL']
 
 # User inputs
-score_diff = st.slider("Points down", min_value = 1, max_value = 8, value = 4)
-yardline_100 = st.number_input("Yards from endzone", min_value = 1, max_value = 99, value = 25)
+score_diff = st.slider("Points down by", min_value = 1, max_value = 8, value = 4)
+yardline_100 = st.number_input("Yards till Opponent's Endzone", min_value = 1, max_value = 99, value = 75)
 quarter_seconds_remaining = st.number_input("Time Remaining in 4th Qtr (seconds)", min_value=0, max_value = 120, value=120)
-down = st.number_input("Down", 1, 4, value = 1, step = 1)
+
+huddle_col, timeouts_col, down_col = st.columns(3)
+with huddle_col:
+    no_huddle = st.toggle("No huddle?", value = False)
+with timeouts_col:
+    timeouts = st.radio("Timeouts left", [0, 1, 2, 3], index = 3)
+with down_col:
+    down = st.radio("Down", [1, 2, 3, 4], index = 0)
+    
 ydstogo = st.number_input("Distance to First Down (yards)", 1, 30, value = 10, step = 1)
-timeouts = st.number_input("Timeouts left:", 0, 3, value = 3, step = 1)
+
 defenders_in_box = st.slider("Defenders in the box", 0, 9, value = 5, step = 1)
 number_of_pass_rushers = st.slider("Number of pass rushers", 0, 8, value = 4, step = 1)
-no_huddle = st.checkbox("No huddle?", value = False)
-out_of_bounds = st.checkbox("Did play go out of bounds?", value = False)
-pressure = st.checkbox("Was the QB pressured?", value = False)
 time_to_throw = st.slider("Time to throw (seconds)", min_value = 0.5, max_value = 13.5, value = 2.67, step = 0.01)
-pass_length = st.selectbox('Choose pass length:', lengths)
-pass_location = st.selectbox('Choose pass location:', locations)
-route = st.selectbox('Choose route completed:', routes)
-# score_difference = st.number_input("Score Difference (Offense - Defense)", value=0)
+
+oob_col, press_col = st.columns(2)
+with oob_col:
+    out_of_bounds = st.checkbox("Did play go out of bounds?", value = False)
+with press_col:
+    pressure = st.checkbox("Was the QB pressured?", value = False)
+
+# TODO: For the following two features, we may not want to consider them if we're selecting multiple routes
+# Moreover, we may want to just drop them in general, particularly 'Pass length'
+pass_length = st.selectbox('Pass length', LENGTHS) 
+pass_location = st.selectbox('Pass location', LOCATIONS)
+
+# TODO: Update app such that it'll let a user select multiple routes
+# SO turn 'route_selected' from a scalar to a list with 'routes_selected'
+# and adjust dictionary to reflect this change
+route_selected = st.selectbox('Route targeted', ROUTES)
 
 # Create feature dictionary
 features = {
-    'score_differential_post': score_diff, 
+    'score_differential_post': score_diff * -1, 
     'yardline_100' : yardline_100,
     'quarter_seconds_remaining': quarter_seconds_remaining,
     'down': down,
@@ -43,7 +60,7 @@ features = {
     'number_of_pass_rushers': number_of_pass_rushers,
     'time_to_throw': time_to_throw,
     'pressure_encoded': pressure,
-    'route_encoded': route,
+    'route_encoded': route_selected
 }
 
 # Predict and display results
@@ -51,6 +68,6 @@ if st.button("Predict EPAs per Coverage"):
     play = predict_play(features)
     output = play[['Coverage', 'predicted_EPA']].sort_values(by=['predicted_EPA'])
     st.write(f"### Predicted EPAs Based on Scenario: ")
-    st.dataframe(output)
+    st.dataframe(output, hide_index=True)
 
     
