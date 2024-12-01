@@ -10,7 +10,7 @@ LOCATIONS = ['left', 'right', 'middle']
 ROUTES = ['SCREEN', 'OUT', 'IN', 'SLANT', 'GO', 'HITCH', 'CROSS', 'ANGLE', 'FLAT', 'POST', 'CORNER', 'WHEEL']
 
 # User inputs
-score_diff = st.slider("Points down by", min_value = 1, max_value = 8, value = 4)
+score_diff = st.slider("Points down by", min_value = 0, max_value = 8, value = 4)
 yardline_100 = st.number_input("Yards till Opponent's Endzone", min_value = 1, max_value = 99, value = 75)
 quarter_seconds_remaining = st.number_input("Time Remaining in 4th Qtr (seconds)", min_value=0, max_value = 120, value=120)
 
